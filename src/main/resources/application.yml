@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: dk-blog
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/dk?useSSL=false&serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: 123456
+logging:
+  file:
+    path: logs
+server:
+  port: 8088
