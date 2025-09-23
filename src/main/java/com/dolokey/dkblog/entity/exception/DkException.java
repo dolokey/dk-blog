@@ -6,7 +6,6 @@
 package com.dolokey.dkblog.entity.exception;
 
 
-import lombok.NoArgsConstructor;
 
 /**
  * 全局异常类

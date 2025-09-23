@@ -7,6 +7,9 @@ package com.dolokey.dkblog.service;
 
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.dolokey.dkblog.entity.dto.UserDTO;
+import com.dolokey.dkblog.entity.exception.ServiceException;
+import com.dolokey.dkblog.entity.exception.ValidationException;
 import com.dolokey.dkblog.model.User;
 
 import java.util.List;
@@ -19,5 +22,7 @@ import java.util.List;
  */
 public interface IUserService {
 
-    Page<User> list(Page<User> page);
+    List<User> list(UserDTO searchBean, Page<User> page);
+
+    int save(UserDTO userDTO) throws ValidationException, ServiceException;
 }

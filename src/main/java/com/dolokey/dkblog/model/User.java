@@ -6,8 +6,9 @@
 package com.dolokey.dkblog.model;
 
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.dolokey.dkblog.entity.common.TEntity;
 import com.dolokey.dkblog.enums.UserStatus;
@@ -33,8 +34,8 @@ public class User extends TEntity {
     /**
      * 用户编号
      */
-    @TableField(value = "id")
-    private String id;
+    @TableId(value = "id", type = IdType.AUTO)
+    private Integer id;
 
     /**
      * 用户名
@@ -47,6 +48,12 @@ public class User extends TEntity {
      */
     @TableField(value = "password")
     private String password;
+
+    /**
+     * 头像路径
+     */
+    @TableField(value = "avatar")
+    private String avatar;
 
     /**
      * 用户昵称

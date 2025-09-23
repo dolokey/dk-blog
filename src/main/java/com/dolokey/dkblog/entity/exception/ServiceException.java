@@ -15,13 +15,13 @@ import com.dolokey.dkblog.constant.LogConstant;
  * @author chenjinyao
  * @date 2025/09/15
  */
-public class DkServiceException extends DkException {
+public class ServiceException extends DkException {
 
-    public DkServiceException() {
+    public ServiceException() {
         this(LogConstant.SERVICE_EXCEPTION);
     }
 
-    public DkServiceException(String message) {
+    public ServiceException(String message) {
         super(CharSequenceUtil.isBlank(message) ? LogConstant.SERVICE_EXCEPTION : message);
     }
 }

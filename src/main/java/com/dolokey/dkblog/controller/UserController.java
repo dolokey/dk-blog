@@ -6,14 +6,23 @@
 package com.dolokey.dkblog.controller;
 
 
+import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.dolokey.dkblog.entity.api.MR;
+import com.dolokey.dkblog.entity.api.R;
+import com.dolokey.dkblog.entity.dto.UserDTO;
+import com.dolokey.dkblog.entity.exception.ServiceException;
+import com.dolokey.dkblog.entity.exception.ValidationException;
+import com.dolokey.dkblog.entity.vo.UserVO;
 import com.dolokey.dkblog.model.User;
 import com.dolokey.dkblog.service.IUserService;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * 用户控制层
@@ -29,8 +38,15 @@ public class UserController {
     private IUserService userService;
 
     @GetMapping("/list")
-    public MR<User> list(Page<User> page) {
-        Page<User> list = userService.list(page);
-        return MR.data(list);
+    public MR<UserVO> list(UserDTO searchBean, Page<User> page) {
+        List<User> list = userService.list(searchBean, page);
+        page.setRecords(list);
+        return MR.data(page.convert(user -> BeanUtil.toBean(user, UserVO.class)));
+    }
+
+    @PostMapping("/save")
+    public R<Integer> save(UserDTO userDTO) throws ValidationException, ServiceException {
+        int id = userService.save(userDTO);
+        return R.data(id);
     }
 }

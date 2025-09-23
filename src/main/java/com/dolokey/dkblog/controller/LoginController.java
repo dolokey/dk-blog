@@ -7,7 +7,6 @@ package com.dolokey.dkblog.controller;
 
 
 import com.dolokey.dkblog.entity.api.R;
-import com.dolokey.dkblog.entity.exception.DkClientException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

@@ -7,9 +7,9 @@ package com.dolokey.dkblog.config;
 
 import com.dolokey.dkblog.constant.LogConstant;
 import com.dolokey.dkblog.entity.api.R;
-import com.dolokey.dkblog.entity.exception.DkClientException;
+import com.dolokey.dkblog.entity.exception.ClientException;
 import com.dolokey.dkblog.entity.exception.DkException;
-import com.dolokey.dkblog.entity.exception.DkServiceException;
+import com.dolokey.dkblog.entity.exception.ServiceException;
 import com.dolokey.dkblog.enums.ResultCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
@@ -27,14 +27,14 @@ import org.springframework.web.servlet.resource.NoResourceFoundException;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(DkServiceException.class)
-    public R<Void> handleDkServiceException(DkServiceException e) {
+    @ExceptionHandler(ServiceException.class)
+    public R<Void> handleDkServiceException(ServiceException e) {
         log.error("业务异常捕获：{}", e.getMessage(), e);
         return R.fail(LogConstant.SERVICE_EXCEPTION);
     }
 
-    @ExceptionHandler(DkClientException.class)
-    public R<Void> handleDkClientException(DkClientException e) {
+    @ExceptionHandler(ClientException.class)
+    public R<Void> handleDkClientException(ClientException e) {
         log.info("客户端异常捕获：{}", e.getMessage());
         return R.fail(e.getMessage());
     }

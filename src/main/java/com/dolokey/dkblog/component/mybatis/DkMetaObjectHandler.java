@@ -16,6 +16,7 @@ import java.util.Date;
 /**
  * 元数据处理器<br>
  * 实现用于自动填充创建用户及更新用户
+ *
  * @author chenjinyao
  * @date 2025/09/22
  */
@@ -23,13 +24,22 @@ import java.util.Date;
 @Component
 public class DkMetaObjectHandler implements MetaObjectHandler {
 
+
     @Override
     public void insertFill(MetaObject metaObject) {
-        this.strictInsertFill(metaObject, "crTime", Date.class, new Date());
+        // 创建时设置默认值 填充创建时间和更新时间（需要判断更新时间时，仅需要判断更新时间，不需要考虑空值）
+        Date currentTime = new Date();
+        this.strictInsertFill(metaObject, "crTime", Date.class, currentTime);
+        this.strictInsertFill(metaObject, "upTime", Date.class, currentTime);
+        // 临时（后续改为成）
+        this.strictInsertFill(metaObject, "crUser", String.class, "dolphin");
+        this.strictInsertFill(metaObject, "upUser", String.class, "dolphin");
     }
 
     @Override
     public void updateFill(MetaObject metaObject) {
-        this.strictUpdateFill(metaObject, "upTime", Date.class, new Date());
+        this.strictInsertFill(metaObject, "upTime", Date.class, new Date());
+        // 临时
+        this.strictInsertFill(metaObject, "upUser", String.class, "dolphin");
     }
 }

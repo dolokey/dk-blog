@@ -30,4 +30,8 @@ public class LogConstant {
      * 客户端调用错误
      */
     public static final String CLIENT_EXCEPTION = "客户端调用错误";
+    /**
+     * 校验异常
+     */
+    public static final String VALIDATION_EXCEPTION = "参数校验异常";
 }

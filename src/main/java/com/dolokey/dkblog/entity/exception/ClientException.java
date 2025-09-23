@@ -15,13 +15,13 @@ import com.dolokey.dkblog.constant.LogConstant;
  * @author chenjinyao
  * @date 2025/09/15
  */
-public class DkClientException extends DkException {
+public class ClientException extends DkException {
 
-    public DkClientException() {
+    public ClientException() {
         this(LogConstant.CLIENT_EXCEPTION);
     }
 
-    public DkClientException(String message) {
+    public ClientException(String message) {
         super(CharSequenceUtil.isBlank(message) ? LogConstant.CLIENT_EXCEPTION : message);
     }
 }

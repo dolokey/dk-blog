@@ -40,13 +40,13 @@ public class TEntity implements Serializable {
     /**
      * 修改时间
      */
-    @TableField(value = "up_time", fill = FieldFill.UPDATE)
+    @TableField(value = "up_time", fill = FieldFill.INSERT_UPDATE)
     protected Date upTime;
 
     /**
      * 修改用户
      */
-    @TableField(value = "up_user", fill = FieldFill.UPDATE)
+    @TableField(value = "up_user", fill = FieldFill.INSERT_UPDATE)
     protected String upUser;
 
     @Serial

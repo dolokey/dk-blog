@@ -6,11 +6,9 @@
 package com.dolokey.dkblog.entity.api;
 
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.dolokey.dkblog.enums.ResultCode;
 import lombok.Data;
-
-import java.util.List;
 
 /**
  * 批量接口返回对象
@@ -21,19 +19,19 @@ import java.util.List;
 @Data
 public class MR<T> {
 
-    private MR(Page<T> page) {
+    private MR(IPage<T> page) {
         this(ResultCode.SUCCESS.getCode(), page, ResultCode.SUCCESS.getMessage());
     }
 
 
-    private MR(int code, Page<T> data, String message) {
+    private MR(int code, IPage<T> data, String message) {
         this.code = code;
         this.data = data;
         this.message = message;
         this.error = ResultCode.FAILURE.getCode() == code;
     }
 
-    public static <T> MR<T> data(Page<T> page) {
+    public static <T> MR<T> data(IPage<T> page) {
         return new MR<>(page);
     }
 
@@ -55,6 +53,6 @@ public class MR<T> {
     /**
      * 数据
      */
-    private Page<T> data;
+    private IPage<T> data;
 
 }
