@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 /**
@@ -34,5 +35,16 @@ public class SecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authenticationProvider(dkAuthenticationProvider);
         return http.build();
+    }
+
+    /**
+     * 密码编码器<br>
+     * 保存需要加密的密码时使用
+     *
+     * @return 密码编码器
+     */
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 }

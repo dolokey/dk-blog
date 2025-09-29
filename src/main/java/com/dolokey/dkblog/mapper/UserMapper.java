@@ -6,7 +6,6 @@
 package com.dolokey.dkblog.mapper;
 
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.dolokey.dkblog.model.User;
 
 /**
@@ -16,5 +15,5 @@ import com.dolokey.dkblog.model.User;
  * @date 2025/09/22
  */
 
-public interface UserMapper extends BaseMapper<User> {
+public interface UserMapper extends BaseServiceMapper<User> {
 }

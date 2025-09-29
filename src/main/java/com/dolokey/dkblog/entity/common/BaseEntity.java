@@ -9,33 +9,23 @@ package com.dolokey.dkblog.entity.common;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-import java.io.*;
+import java.io.Serial;
 import java.util.Date;
 
 /**
- * 基础对象
- *
+ * 基础对象<br>
+ * 在核心对象的基础，对于需要记录更新情况的对象
  * @author chenjinyao
  * @date 2025/09/20
  */
 @Data
-public class TEntity implements Serializable {
+@EqualsAndHashCode(callSuper = true)
+public class BaseEntity extends CoreEntity {
 
     @Serial
     private static final long serialVersionUID = 1L;
-
-    /**
-     * 创建时间
-     */
-    @TableField(value = "cr_time", fill = FieldFill.INSERT)
-    protected Date crTime;
-
-    /**
-     * 创建用户
-     */
-    @TableField(value = "cr_user", fill = FieldFill.INSERT)
-    protected String crUser;
 
     /**
      * 修改时间
@@ -48,14 +38,4 @@ public class TEntity implements Serializable {
      */
     @TableField(value = "up_user", fill = FieldFill.INSERT_UPDATE)
     protected String upUser;
-
-    @Serial
-    private void writeObject(ObjectOutputStream stream) throws IOException {
-        stream.defaultWriteObject();
-    }
-
-    @Serial
-    private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
-        stream.defaultReadObject();
-    }
 }

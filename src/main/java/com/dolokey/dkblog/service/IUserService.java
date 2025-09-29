@@ -24,5 +24,9 @@ public interface IUserService {
 
     List<User> list(UserDTO searchBean, Page<User> page);
 
-    int save(UserDTO userDTO) throws ValidationException, ServiceException;
+    Long save(UserDTO userDTO) throws ValidationException, ServiceException;
+
+    void update(UserDTO userDTO) throws ValidationException, ServiceException;
+
+    User findByUsername(String username);
 }

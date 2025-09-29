@@ -31,7 +31,7 @@ public class DkMetaObjectHandler implements MetaObjectHandler {
         Date currentTime = new Date();
         this.strictInsertFill(metaObject, "crTime", Date.class, currentTime);
         this.strictInsertFill(metaObject, "upTime", Date.class, currentTime);
-        // 临时（后续改为成）
+        // 临时（后续改为成用户编号）
         this.strictInsertFill(metaObject, "crUser", String.class, "dolphin");
         this.strictInsertFill(metaObject, "upUser", String.class, "dolphin");
     }

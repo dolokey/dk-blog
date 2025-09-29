@@ -7,7 +7,11 @@ package com.dolokey.dkblog.controller;
 
 
 import com.dolokey.dkblog.entity.api.R;
-import org.springframework.web.bind.annotation.GetMapping;
+import com.dolokey.dkblog.entity.dto.UserDTO;
+import com.dolokey.dkblog.entity.exception.ClientException;
+import com.dolokey.dkblog.service.ILoginService;
+import jakarta.annotation.Resource;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,8 +25,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/login")
 public class LoginController {
 
-    @GetMapping("/login")
-    public R<Void> login() {
+    @Resource
+    private ILoginService loginService;
+
+    @PostMapping("/login")
+    public R<Void> login(UserDTO userDTO) throws ClientException {
+        loginService.login(userDTO);
         return R.success();
     }
 }

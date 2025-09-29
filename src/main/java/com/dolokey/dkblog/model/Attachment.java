@@ -7,7 +7,7 @@ package com.dolokey.dkblog.model;
 
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.dolokey.dkblog.entity.common.TEntity;
+import com.dolokey.dkblog.entity.common.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -21,12 +21,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @TableName("dk_attachment")
-public class Attachment extends TEntity {
-
-    /**
-     * 附件编号
-     */
-    private String id;
+public class Attachment extends BaseEntity {
 
     /**
      * 附件名称

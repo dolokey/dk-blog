@@ -45,8 +45,14 @@ public class UserController {
     }
 
     @PostMapping("/save")
-    public R<Integer> save(UserDTO userDTO) throws ValidationException, ServiceException {
-        int id = userService.save(userDTO);
+    public R<Long> save(UserDTO userDTO) throws ValidationException, ServiceException {
+        Long id = userService.save(userDTO);
         return R.data(id);
+    }
+
+    @PostMapping("/update")
+    public R<Void> update(UserDTO userDTO) throws ValidationException, ServiceException {
+        userService.update(userDTO);
+        return R.success();
     }
 }

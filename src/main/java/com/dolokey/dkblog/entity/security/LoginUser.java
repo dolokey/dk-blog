@@ -24,10 +24,18 @@ import java.util.List;
 @Data
 public class LoginUser implements UserDetails {
 
+    public LoginUser(User user) {
+        this.userId = user.getId();
+        this.username = user.getUsername();
+        this.password = user.getPassword();
+        this.nickname = user.getNickname();
+        this.user = user;
+    }
+
     /**
      * 用户
      */
-    private Integer userId;
+    private Long userId;
 
     /**
      * 用户Token
@@ -71,12 +79,12 @@ public class LoginUser implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return UserStatus.NORMAL.getValue().equals(user.getStatus());
+        return UserStatus.NORMAL.equals(user.getStatus());
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return UserStatus.DISABLED.getValue().equals(user.getStatus());
+        return UserStatus.DISABLED.equals(user.getStatus());
     }
 
     @Override

@@ -6,11 +6,9 @@
 package com.dolokey.dkblog.model;
 
 
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.dolokey.dkblog.entity.common.TEntity;
+import com.dolokey.dkblog.entity.common.BaseEntity;
 import com.dolokey.dkblog.enums.UserStatus;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -26,16 +24,10 @@ import java.io.Serial;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @TableName("dk_user")
-public class User extends TEntity {
+public class User extends BaseEntity {
 
     @Serial
     private static final long serialVersionUID = 1L;
-
-    /**
-     * 用户编号
-     */
-    @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
 
     /**
      * 用户名

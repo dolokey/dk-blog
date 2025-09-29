@@ -20,7 +20,7 @@ public class UserVO {
     /**
      * 用户编号
      */
-    private Integer id;
+    private String id;
 
     /**
      * 头像路径

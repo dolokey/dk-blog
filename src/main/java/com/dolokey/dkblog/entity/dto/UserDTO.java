@@ -20,7 +20,7 @@ public class UserDTO {
     /**
      * 用户编号
      */
-    private Integer id;
+    private String id;
 
     /**
      * 用户名
@@ -37,10 +37,13 @@ public class UserDTO {
      */
     private String avatar;
 
-
     /**
      * 用户昵称
      */
     private String nickname;
+
+    /**
+     *
+     */
 
 }
