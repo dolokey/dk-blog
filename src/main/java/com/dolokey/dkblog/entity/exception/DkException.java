@@ -1,19 +1,13 @@
-/*
- * @Copyright © FUJIAN TERTON SOFTWARE CO., LTD
- */
-
-
 package com.dolokey.dkblog.entity.exception;
-
 
 
 /**
  * 全局异常类
  *
- * @author chenjinyao
+ * @author dolokey
  * @date 2025/09/15
  */
-public class DkException extends Exception{
+public class DkException extends Exception {
 
     public DkException() {
         super();

@@ -1,12 +1,8 @@
-/*
- * @Copyright © FUJIAN TERTON SOFTWARE CO., LTD
- */
-
-
 package com.dolokey.dkblog.component.mybatis;
 
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
+import com.dolokey.dkblog.util.TokenUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.stereotype.Component;
@@ -17,13 +13,12 @@ import java.util.Date;
  * 元数据处理器<br>
  * 实现用于自动填充创建用户及更新用户
  *
- * @author chenjinyao
+ * @author dolokey
  * @date 2025/09/22
  */
 @Slf4j
 @Component
 public class DkMetaObjectHandler implements MetaObjectHandler {
-
 
     @Override
     public void insertFill(MetaObject metaObject) {
@@ -31,15 +26,13 @@ public class DkMetaObjectHandler implements MetaObjectHandler {
         Date currentTime = new Date();
         this.strictInsertFill(metaObject, "crTime", Date.class, currentTime);
         this.strictInsertFill(metaObject, "upTime", Date.class, currentTime);
-        // 临时（后续改为成用户编号）
-        this.strictInsertFill(metaObject, "crUser", String.class, "dolphin");
-        this.strictInsertFill(metaObject, "upUser", String.class, "dolphin");
+        this.strictInsertFill(metaObject, "crUser", String.class, TokenUtil.getLoginUsername());
+        this.strictInsertFill(metaObject, "upUser", String.class, TokenUtil.getLoginUsername());
     }
 
     @Override
     public void updateFill(MetaObject metaObject) {
         this.strictInsertFill(metaObject, "upTime", Date.class, new Date());
-        // 临时
-        this.strictInsertFill(metaObject, "upUser", String.class, "dolphin");
+        this.strictInsertFill(metaObject, "upUser", String.class, TokenUtil.getLoginUsername());
     }
 }

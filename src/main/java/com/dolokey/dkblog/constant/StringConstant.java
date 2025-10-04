@@ -1,20 +1,15 @@
-/*
- * @Copyright © FUJIAN TERTON SOFTWARE CO., LTD
- */
-
-
 package com.dolokey.dkblog.constant;
 
 
 /**
  * 常量池
  *
- * @author chenjinyao
+ * @author dolokey
  * @date 2025/09/15
  */
-public class StringPool {
+public class StringConstant {
 
-    private StringPool() {
+    private StringConstant() {
 
     }
 

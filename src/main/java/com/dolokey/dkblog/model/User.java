@@ -1,8 +1,3 @@
-/*
- * @Copyright © FUJIAN TERTON SOFTWARE CO., LTD
- */
-
-
 package com.dolokey.dkblog.model;
 
 
@@ -18,7 +13,7 @@ import java.io.Serial;
 /**
  * 用户对象
  *
- * @author chenjinyao
+ * @author dolokey
  * @date 2025/09/15
  */
 @Data

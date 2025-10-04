@@ -1,8 +1,3 @@
-/*
- * @Copyright © FUJIAN TERTON SOFTWARE CO., LTD
- */
-
-
 package com.dolokey.dkblog.model;
 
 
@@ -14,7 +9,7 @@ import lombok.EqualsAndHashCode;
 /**
  * 附件对象<br>
  *
- * @author chenjinyao
+ * @author dolokey
  * @date 2025/09/15
  */
 

@@ -1,8 +1,3 @@
-/*
- * @Copyright © FUJIAN TERTON SOFTWARE CO., LTD
- */
-
-
 package com.dolokey.dkblog.controller;
 
 
@@ -18,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 登录控制层
  *
- * @author chenjinyao
+ * @author dolokey
  * @date 2025/09/16
  */
 @RestController
@@ -29,8 +24,8 @@ public class LoginController {
     private ILoginService loginService;
 
     @PostMapping("/login")
-    public R<Void> login(UserDTO userDTO) throws ClientException {
-        loginService.login(userDTO);
-        return R.success();
+    public R<String> login(UserDTO userDTO) throws ClientException {
+        String token = loginService.login(userDTO);
+        return R.data(token);
     }
 }

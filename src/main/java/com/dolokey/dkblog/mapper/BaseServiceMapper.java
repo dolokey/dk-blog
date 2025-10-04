@@ -1,8 +1,3 @@
-/*
- * @Copyright © FUJIAN TERTON SOFTWARE CO., LTD
- */
-
-
 package com.dolokey.dkblog.mapper;
 
 
@@ -15,7 +10,7 @@ import org.slf4j.LoggerFactory;
 /**
  * 基础服务实现类
  *
- * @author chenjinyao
+ * @author dolokey
  * @date 2025/09/29
  */
 public interface BaseServiceMapper<T extends CoreEntity> extends BaseMapper<T> {

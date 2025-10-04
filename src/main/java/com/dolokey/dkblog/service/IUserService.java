@@ -1,8 +1,3 @@
-/*
- * @Copyright © FUJIAN TERTON SOFTWARE CO., LTD
- */
-
-
 package com.dolokey.dkblog.service;
 
 
@@ -17,7 +12,7 @@ import java.util.List;
 /**
  * 用户接口
  *
- * @author chenjinyao
+ * @author dolokey
  * @date 2025/09/22
  */
 public interface IUserService {

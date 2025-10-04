@@ -1,8 +1,3 @@
-/*
- * @Copyright © FUJIAN TERTON SOFTWARE CO., LTD
- */
-
-
 package com.dolokey.dkblog.entity.exception;
 
 
@@ -12,7 +7,7 @@ import com.dolokey.dkblog.constant.LogConstant;
  * 校验异常<br>
  * 继承于客户端异常，抛出给前端
  *
- * @author chenjinyao
+ * @author dolokey
  * @date 2025/09/23
  */
 public class ValidationException extends ClientException {

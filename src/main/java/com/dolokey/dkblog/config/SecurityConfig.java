@@ -1,8 +1,3 @@
-/*
- * @Copyright © FUJIAN TERTON SOFTWARE CO., LTD
- */
-
-
 package com.dolokey.dkblog.config;
 
 
@@ -19,7 +14,7 @@ import org.springframework.security.web.SecurityFilterChain;
 /**
  * 项目安全配置
  *
- * @author chenjinyao
+ * @author dolokey
  * @date 2025/09/16
  */
 @Configuration

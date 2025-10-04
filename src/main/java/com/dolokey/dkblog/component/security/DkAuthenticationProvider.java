@@ -1,8 +1,3 @@
-/*
- * @Copyright © FUJIAN TERTON SOFTWARE CO., LTD
- */
-
-
 package com.dolokey.dkblog.component.security;
 
 
@@ -14,7 +9,7 @@ import org.springframework.stereotype.Component;
 /**
  * 项目默认安全校验
  *
- * @author chenjinyao
+ * @author dolokey
  * @date 2025/09/16
  */
 @Component

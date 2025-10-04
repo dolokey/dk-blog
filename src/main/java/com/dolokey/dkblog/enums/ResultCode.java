@@ -1,8 +1,3 @@
-/*
- * @Copyright © FUJIAN TERTON SOFTWARE CO., LTD
- */
-
-
 package com.dolokey.dkblog.enums;
 
 
@@ -12,7 +7,7 @@ import lombok.Getter;
 /**
  * 接口返回枚举
  *
- * @author chenjinyao
+ * @author dolokey
  * @date 2025/09/15
  */
 @Getter

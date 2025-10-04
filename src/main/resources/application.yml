@@ -10,3 +10,24 @@ logging:
     path: logs
 server:
   port: 8088
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+dk:
+  security:
+    # token配置
+    token:
+      # 用户名
+      admin: dolphin
+      # 用户昵称 在初始化时因安全需求必须配置
+      nickname: dolokey
+      # 令牌自定义标识
+      header: Authorization
+      # 令牌密钥
+      secret: abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz
+      # 令牌有效期（默认30分钟）
+      expireTime: 3600
+      # 用户默认密码
+      defaultPassword: 123456

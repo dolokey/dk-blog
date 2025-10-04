@@ -1,8 +1,3 @@
-/*
- * @Copyright © FUJIAN TERTON SOFTWARE CO., LTD
- */
-
-
 package com.dolokey.dkblog.entity.exception;
 
 
@@ -12,7 +7,7 @@ import com.dolokey.dkblog.constant.LogConstant;
 /**
  * 业务异常类
  *
- * @author chenjinyao
+ * @author dolokey
  * @date 2025/09/15
  */
 public class ServiceException extends DkException {

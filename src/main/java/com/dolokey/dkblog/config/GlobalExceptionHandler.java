@@ -1,14 +1,10 @@
-/*
- * @Copyright © FUJIAN TERTON SOFTWARE CO., LTD
- */
-
-
 package com.dolokey.dkblog.config;
 
 import com.dolokey.dkblog.constant.LogConstant;
 import com.dolokey.dkblog.entity.api.R;
 import com.dolokey.dkblog.entity.exception.ClientException;
 import com.dolokey.dkblog.entity.exception.DkException;
+import com.dolokey.dkblog.entity.exception.DkRuntimeException;
 import com.dolokey.dkblog.entity.exception.ServiceException;
 import com.dolokey.dkblog.enums.ResultCode;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +16,7 @@ import org.springframework.web.servlet.resource.NoResourceFoundException;
 /**
  * 全局异常处理类
  *
- * @author chenjinyao
+ * @author dolokey
  * @date 2025/09/15
  */
 @Slf4j
@@ -45,8 +41,25 @@ public class GlobalExceptionHandler {
         return R.fail(LogConstant.UNEXPECTED_EXCEPTION);
     }
 
+    @ExceptionHandler(DkRuntimeException.class)
+    public R<Void> handleDkRuntimeException(DkRuntimeException e) {
+        log.error("运行时异常捕获：{}", e.getMessage(), e);
+        return R.fail(LogConstant.UNEXPECTED_EXCEPTION);
+    }
+
     @ExceptionHandler(Exception.class)
-    public R<Void> handleException(Exception e) {
+    public R<Void> handleException(Exception e) throws DkRuntimeException {
+        // 异常转发
+        if (e.getCause() instanceof DkException ex) {
+            if (ex instanceof ClientException cex) {
+                return handleDkClientException(cex);
+            } else {
+                return handleDkException(ex);
+            }
+        }
+        if (e.getCause() instanceof DkRuntimeException ex) {
+            return handleDkRuntimeException(ex);
+        }
         log.error("全局异常捕获：{}", e.getMessage(), e);
         return R.fail(LogConstant.UNEXPECTED_EXCEPTION);
     }

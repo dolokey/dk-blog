@@ -1,8 +1,3 @@
-/*
- * @Copyright © FUJIAN TERTON SOFTWARE CO., LTD
- */
-
-
 package com.dolokey.dkblog.entity.common;
 
 
@@ -17,7 +12,7 @@ import java.util.Date;
 /**
  * 基础对象<br>
  * 在核心对象的基础，对于需要记录更新情况的对象
- * @author chenjinyao
+ * @author dolokey
  * @date 2025/09/20
  */
 @Data

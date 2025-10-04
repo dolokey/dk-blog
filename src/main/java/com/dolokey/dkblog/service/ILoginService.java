@@ -1,8 +1,3 @@
-/*
- * @Copyright © FUJIAN TERTON SOFTWARE CO., LTD
- */
-
-
 package com.dolokey.dkblog.service;
 
 
@@ -12,9 +7,9 @@ import com.dolokey.dkblog.entity.exception.ClientException;
 /**
  * 登录接口
  *
- * @author chenjinyao
+ * @author dolokey
  * @date 2025/09/29
  */
 public interface ILoginService {
-    void login(UserDTO userDTO) throws ClientException;
+    String login(UserDTO userDTO) throws ClientException;
 }

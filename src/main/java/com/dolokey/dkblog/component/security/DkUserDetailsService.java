@@ -1,8 +1,3 @@
-/*
- * @Copyright © FUJIAN TERTON SOFTWARE CO., LTD
- */
-
-
 package com.dolokey.dkblog.component.security;
 
 
@@ -16,7 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 /**
  * 用户认证服务
  *
- * @author chenjinyao
+ * @author dolokey
  * @date 2025/09/20
  */
 public class DkUserDetailsService implements UserDetailsService {

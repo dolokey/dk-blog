@@ -1,15 +1,10 @@
-/*
- * @Copyright © FUJIAN TERTON SOFTWARE CO., LTD
- */
-
-
 package com.dolokey.dkblog.constant;
 
 
 /**
  * 通用常量
  *
- * @author chenjinyao
+ * @author dolokey
  * @date 2025/09/29
  */
 public class CommonConstant {
@@ -19,5 +14,11 @@ public class CommonConstant {
     }
 
     public static final String[] EMPTY_STRING_ARRAY = new String[0];
+
+    /**
+     * 令牌前缀
+     */
+    public static final String TOKEN_PREFIX = "Bearer ";
+
 
 }

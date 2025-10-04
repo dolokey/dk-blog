@@ -1,20 +1,15 @@
-/*
- * @Copyright © FUJIAN TERTON SOFTWARE CO., LTD
- */
-
-
 package com.dolokey.dkblog.util;
 
 
 import cn.hutool.core.text.CharSequenceUtil;
-import com.dolokey.dkblog.constant.StringPool;
+import com.dolokey.dkblog.constant.StringConstant;
 import com.dolokey.dkblog.entity.exception.ServiceException;
 import com.dolokey.dkblog.entity.exception.ValidationException;
 
 /**
  * 校验工具
  *
- * @author chenjinyao
+ * @author dolokey
  * @date 2025/09/23
  */
 public class ValidateUtil {
@@ -46,7 +41,7 @@ public class ValidateUtil {
                 throw new ValidationException(fieldName + "不能为空！");
             } else {
                 // 数据库字段非必要不存储空值
-                return StringPool.EMPTY;
+                return StringConstant.EMPTY;
             }
         }
         value = value.trim();

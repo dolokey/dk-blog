@@ -1,8 +1,3 @@
-/*
- * @Copyright © FUJIAN TERTON SOFTWARE CO., LTD
- */
-
-
 package com.dolokey.dkblog.entity.common;
 
 
@@ -12,7 +7,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.dolokey.dkblog.constant.CommonConstant;
-import com.dolokey.dkblog.constant.StringPool;
+import com.dolokey.dkblog.constant.StringConstant;
 import com.dolokey.dkblog.entity.exception.ServiceException;
 import lombok.Data;
 
@@ -25,7 +20,7 @@ import java.util.List;
  * 核心对象<br>
  * 所有对象都需要创建时间和创建用户<br>
  *
- * @author chenjinyao
+ * @author dolokey
  * @date 2025/09/29
  */
 @Data
@@ -59,7 +54,7 @@ public class CoreEntity implements Serializable {
         if (CharSequenceUtil.isBlank(ids)) {
             return CommonConstant.EMPTY_STRING_ARRAY;
         }
-        String[] idArr = ids.split(StringPool.COMMA);
+        String[] idArr = ids.split(StringConstant.COMMA);
         for (String id : idArr) {
             if (CharSequenceUtil.isNumeric(id)) {
                 throw new ServiceException("编号[" + id + "]不是数字");

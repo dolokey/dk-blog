@@ -1,8 +1,3 @@
-/*
- * @Copyright © FUJIAN TERTON SOFTWARE CO., LTD
- */
-
-
 package com.dolokey.dkblog.entity.dto;
 
 
@@ -11,7 +6,7 @@ import lombok.Data;
 /**
  * 用户数据传输对象
  *
- * @author chenjinyao
+ * @author dolokey
  * @date 2025/09/23
  */
 @Data

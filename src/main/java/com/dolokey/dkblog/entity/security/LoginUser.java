@@ -1,8 +1,3 @@
-/*
- * @Copyright © FUJIAN TERTON SOFTWARE CO., LTD
- */
-
-
 package com.dolokey.dkblog.entity.security;
 
 
@@ -13,12 +8,13 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 /**
  * 权限用户详情
  *
- * @author chenjinyao
+ * @author dolokey
  * @date 2025/09/20
  */
 @Data
@@ -36,11 +32,6 @@ public class LoginUser implements UserDetails {
      * 用户
      */
     private Long userId;
-
-    /**
-     * 用户Token
-     */
-    private String token;
 
     /**
      * 用户名称
@@ -61,6 +52,11 @@ public class LoginUser implements UserDetails {
      * 用户实例
      */
     private User user;
+
+    /**
+     * 到期时间
+     */
+    private Date expireTime;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

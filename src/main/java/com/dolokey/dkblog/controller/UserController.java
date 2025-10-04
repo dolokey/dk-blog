@@ -1,8 +1,3 @@
-/*
- * @Copyright © FUJIAN TERTON SOFTWARE CO., LTD
- */
-
-
 package com.dolokey.dkblog.controller;
 
 
@@ -13,7 +8,9 @@ import com.dolokey.dkblog.entity.api.R;
 import com.dolokey.dkblog.entity.dto.UserDTO;
 import com.dolokey.dkblog.entity.exception.ServiceException;
 import com.dolokey.dkblog.entity.exception.ValidationException;
+import com.dolokey.dkblog.entity.security.ServeRight;
 import com.dolokey.dkblog.entity.vo.UserVO;
+import com.dolokey.dkblog.enums.ServeRightType;
 import com.dolokey.dkblog.model.User;
 import com.dolokey.dkblog.service.IUserService;
 import jakarta.annotation.Resource;
@@ -27,11 +24,12 @@ import java.util.List;
 /**
  * 用户控制层
  *
- * @author chenjinyao
+ * @author dolokey
  * @date 2025/09/22
  */
 @RestController
 @RequestMapping("/user")
+@ServeRight(type = ServeRightType.ADMIN)
 public class UserController {
 
     @Resource

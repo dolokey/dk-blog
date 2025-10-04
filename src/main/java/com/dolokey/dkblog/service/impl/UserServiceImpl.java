@@ -1,8 +1,3 @@
-/*
- * @Copyright © FUJIAN TERTON SOFTWARE CO., LTD
- */
-
-
 package com.dolokey.dkblog.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
@@ -15,6 +10,7 @@ import com.dolokey.dkblog.entity.exception.ValidationException;
 import com.dolokey.dkblog.mapper.UserMapper;
 import com.dolokey.dkblog.model.User;
 import com.dolokey.dkblog.service.IUserService;
+import com.dolokey.dkblog.util.TokenUtil;
 import com.dolokey.dkblog.util.ValidateUtil;
 import jakarta.annotation.Resource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -25,7 +21,7 @@ import java.util.List;
 /**
  * 用户接口实现类
  *
- * @author chenjinyao
+ * @author dolokey
  * @date 2025/09/22
  */
 @Service
@@ -79,6 +75,9 @@ public class UserServiceImpl implements IUserService {
         userDTO.setAvatar(ValidateUtil.validate(userDTO.getAvatar(), "用户头像", 0, 128, false));
         if (userMapper.exists(new LambdaQueryWrapper<User>().eq(User::getUsername, userDTO.getUsername()))) {
             throw new ValidationException("用户名已存在");
+        }
+        if (TokenUtil.UNKNOWN.equals(TokenUtil.getLoginUsername())) {
+            throw new ServiceException("系统保留的用户不支持创建");
         }
     }
 }
