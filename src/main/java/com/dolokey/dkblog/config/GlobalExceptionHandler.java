@@ -2,10 +2,7 @@ package com.dolokey.dkblog.config;
 
 import com.dolokey.dkblog.constant.LogConstant;
 import com.dolokey.dkblog.entity.api.R;
-import com.dolokey.dkblog.entity.exception.ClientException;
-import com.dolokey.dkblog.entity.exception.DkException;
-import com.dolokey.dkblog.entity.exception.DkRuntimeException;
-import com.dolokey.dkblog.entity.exception.ServiceException;
+import com.dolokey.dkblog.entity.exception.*;
 import com.dolokey.dkblog.enums.ResultCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
@@ -23,26 +20,26 @@ import org.springframework.web.servlet.resource.NoResourceFoundException;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(ServiceException.class)
-    public R<Void> handleDkServiceException(ServiceException e) {
-        log.error("业务异常捕获：{}", e.getMessage(), e);
-        return R.fail(LogConstant.SERVICE_EXCEPTION);
-    }
-
-    @ExceptionHandler(ClientException.class)
-    public R<Void> handleDkClientException(ClientException e) {
-        log.info("客户端异常捕获：{}", e.getMessage());
-        return R.fail(e.getMessage());
-    }
-
     @ExceptionHandler(DkException.class)
     public R<Void> handleDkException(DkException e) {
+        if (e instanceof ServiceException) {
+            log.error("业务异常捕获：{}", e.getMessage(), e);
+            return R.fail(LogConstant.SERVICE_EXCEPTION);
+        }
+        if (e instanceof ClientException) {
+            log.info("客户端异常捕获：{}", e.getMessage());
+            return R.fail(e.getMessage());
+        }
         log.error("项目异常捕获：{}", e.getMessage(), e);
         return R.fail(LogConstant.UNEXPECTED_EXCEPTION);
     }
 
     @ExceptionHandler(DkRuntimeException.class)
     public R<Void> handleDkRuntimeException(DkRuntimeException e) {
+        if (e instanceof RuntimeClientException ex) {
+            log.error("运行时客户端异常捕获：{}", e.getMessage(), e);
+            return R.fail(ex.getMessage());
+        }
         log.error("运行时异常捕获：{}", e.getMessage(), e);
         return R.fail(LogConstant.UNEXPECTED_EXCEPTION);
     }
@@ -51,11 +48,7 @@ public class GlobalExceptionHandler {
     public R<Void> handleException(Exception e) throws DkRuntimeException {
         // 异常转发
         if (e.getCause() instanceof DkException ex) {
-            if (ex instanceof ClientException cex) {
-                return handleDkClientException(cex);
-            } else {
-                return handleDkException(ex);
-            }
+            return handleDkException(ex);
         }
         if (e.getCause() instanceof DkRuntimeException ex) {
             return handleDkRuntimeException(ex);

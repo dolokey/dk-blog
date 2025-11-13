@@ -10,11 +10,9 @@ import cn.hutool.extra.spring.SpringUtil;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.dolokey.dkblog.component.security.TokenProperties;
 import com.dolokey.dkblog.constant.CommonConstant;
+import com.dolokey.dkblog.constant.LogConstant;
 import com.dolokey.dkblog.entity.dto.UserDTO;
-import com.dolokey.dkblog.entity.exception.ConfigException;
-import com.dolokey.dkblog.entity.exception.DkException;
-import com.dolokey.dkblog.entity.exception.DkRuntimeException;
-import com.dolokey.dkblog.entity.exception.ServiceException;
+import com.dolokey.dkblog.entity.exception.*;
 import com.dolokey.dkblog.entity.security.LoginUser;
 import com.dolokey.dkblog.mapper.UserMapper;
 import com.dolokey.dkblog.model.User;
@@ -25,6 +23,7 @@ import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -162,7 +161,7 @@ public class TokenUtil {
         Map<String, Object> claims = new HashMap<>();
         claims.put(USER_ID, loginUser.getUserId());
         claims.put(USERNAME, loginUser.getUsername());
-        claims.put(LOGIN_TIME, DateUtil.now());
+        claims.put(LOGIN_TIME, loginUser.getLoginTime());
         claims.put(SALT, IdUtil.simpleUUID());
 
         SecretKey secretKey = getSecretKey();
@@ -214,7 +213,21 @@ public class TokenUtil {
         }
         Claims claims = parseToken(token);
         Long userId = claims.get(USER_ID, Long.class);
-        return LOGIN_USER_INFO.get(userId);
+        // 没有找到登录信息 视为未登录
+        LoginUser loginUser = LOGIN_USER_INFO.get(userId);
+        if (loginUser == null) {
+            throw new RuntimeClientException(LogConstant.LOGIN_EXPIRED);
+        }
+        // 登录时间不同视为token已被刷新 旧token过期
+        Date loginTime = claims.get(LOGIN_TIME, Date.class);
+        if (!loginTime.equals(loginUser.getLoginTime())) {
+            throw new RuntimeClientException(LogConstant.LOGIN_EXPIRED);
+        }
+        // 登录已过期 为null时说明还没初始化 初始化后才进行检验
+        if (loginUser.getExpireTime() != null && loginUser.getExpireTime().before(DateUtil.date())) {
+            throw new RuntimeClientException(LogConstant.LOGIN_EXPIRED);
+        }
+        return loginUser;
     }
 
     /**
@@ -237,7 +250,10 @@ public class TokenUtil {
      * @return token
      */
     public static String setLoginUser(User user) {
+        // 用于验证token是否被废弃
+        Date loginTime = DateUtil.date();
         LoginUser loginUser = new LoginUser(user);
+        loginUser.setLoginTime(loginTime);
         LOGIN_USER_INFO.put(user.getId(), loginUser);
         String token = generateToken(loginUser);
         refreshToken(token);
@@ -262,28 +278,11 @@ public class TokenUtil {
     public static void userLogout() {
         LoginUser loginUser = getLoginUser();
         if (loginUser != null) {
+            // 登出时重置用户线程 防止后续触发校验
+            MockHttpServletRequest exitRequest = new MockHttpServletRequest();
+            ServletRequestAttributes attributes = new ServletRequestAttributes(exitRequest);
+            RequestContextHolder.setRequestAttributes(attributes);
             LOGIN_USER_INFO.remove(loginUser.getUserId());
         }
     }
-
-    /**
-     * 判断用户是否登录
-     *
-     * @param logout 是否登出
-     * @return 是否登录
-     */
-    public static boolean isLogin(boolean logout) {
-        LoginUser loginUser = getLoginUser();
-        if (loginUser == null) {
-            return false;
-        }
-        if (loginUser.getExpireTime() == null || loginUser.getExpireTime().before(DateUtil.date())) {
-            if (logout) {
-                userLogout();
-            }
-            return false;
-        }
-        return true;
-    }
-
 }

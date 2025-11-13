@@ -8,6 +8,7 @@ import com.dolokey.dkblog.entity.api.R;
 import com.dolokey.dkblog.entity.dto.UserDTO;
 import com.dolokey.dkblog.entity.exception.ServiceException;
 import com.dolokey.dkblog.entity.exception.ValidationException;
+import com.dolokey.dkblog.entity.security.Logging;
 import com.dolokey.dkblog.entity.security.ServeRight;
 import com.dolokey.dkblog.entity.vo.UserVO;
 import com.dolokey.dkblog.enums.ServeRightType;
@@ -43,14 +44,16 @@ public class UserController {
     }
 
     @PostMapping("/save")
+    @Logging(type = User.class, desc = "新增用户")
     public R<Long> save(UserDTO userDTO) throws ValidationException, ServiceException {
         Long id = userService.save(userDTO);
         return R.data(id);
     }
 
     @PostMapping("/update")
-    public R<Void> update(UserDTO userDTO) throws ValidationException, ServiceException {
-        userService.update(userDTO);
-        return R.success();
+    @Logging(type = User.class, desc = "更新用户")
+    public R<Long> update(UserDTO userDTO) throws ValidationException, ServiceException {
+        Long id = userService.update(userDTO);
+        return R.data(id);
     }
 }

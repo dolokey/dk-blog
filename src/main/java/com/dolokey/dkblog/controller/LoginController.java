@@ -4,6 +4,8 @@ package com.dolokey.dkblog.controller;
 import com.dolokey.dkblog.entity.api.R;
 import com.dolokey.dkblog.entity.dto.UserDTO;
 import com.dolokey.dkblog.entity.exception.ClientException;
+import com.dolokey.dkblog.entity.security.Logging;
+import com.dolokey.dkblog.entity.security.LoginUser;
 import com.dolokey.dkblog.service.ILoginService;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,8 +26,17 @@ public class LoginController {
     private ILoginService loginService;
 
     @PostMapping("/login")
+    @Logging(type = LoginUser.class, desc = "用户登录", manual = true)
     public R<String> login(UserDTO userDTO) throws ClientException {
         String token = loginService.login(userDTO);
         return R.data(token);
+    }
+
+
+    @PostMapping("/logout")
+    @Logging(type = LoginUser.class, desc = "用户登出")
+    public R<Long> logout() throws ClientException {
+        Long userId = loginService.logout();
+        return R.data(userId);
     }
 }

@@ -1,72 +1,67 @@
-package com.dolokey.dkblog.model;
+package com.dolokey.dkblog.entity.vo;
 
-
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.dolokey.dkblog.entity.common.CoreEntity;
 import com.dolokey.dkblog.enums.LogOperateResult;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import java.util.Date;
 
 /**
- * 操作日志
+ * 日志视图
  *
  * @author dolokey
- * @date 2025/09/29
+ * @date 2025/11/13
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
-@TableName("dk_log")
-public class Log extends CoreEntity {
+public class LogVO {
+
 
     /**
      * 操作类型
      */
-    @TableField("type")
     private String type;
 
     /**
      * 操作对象
      */
-    @TableField("object")
     private Long object;
 
     /**
      * 操作描述
      */
-    @TableField("operate_desc")
     private String operateDesc;
 
     /**
      * 操作结果
      */
-    @TableField("result")
     private LogOperateResult result;
 
     /**
      * 开始时间
      */
-    @TableField("start_time")
     private Date startTime;
 
     /**
      * 操作耗时
      */
-    @TableField("cost_time")
     private Long costTime;
 
     /**
      * 请求参数
      */
-    @TableField("params")
     private String params;
 
     /**
      * 结果说明
      */
-    @TableField("error_msg")
     private String errorMsg;
 
+    /**
+     * 创建用户
+     */
+    private String crUser;
+
+    /**
+     * 创建时间
+     */
+    private Date crTime;
 }

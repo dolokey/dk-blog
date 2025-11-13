@@ -21,7 +21,7 @@ public interface IUserService {
 
     Long save(UserDTO userDTO) throws ValidationException, ServiceException;
 
-    void update(UserDTO userDTO) throws ValidationException, ServiceException;
+    Long update(UserDTO userDTO) throws ValidationException, ServiceException;
 
     User findByUsername(String username);
 }

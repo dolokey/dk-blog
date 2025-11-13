@@ -12,4 +12,6 @@ import com.dolokey.dkblog.entity.exception.ClientException;
  */
 public interface ILoginService {
     String login(UserDTO userDTO) throws ClientException;
+
+    Long logout() throws ClientException;
 }

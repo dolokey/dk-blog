@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
  * @date 2025/09/16
  */
 @Component
-public class DkAuthenticationProvider implements AuthenticationProvider {
+public class EmptyAuthenticationProvider implements AuthenticationProvider {
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {

@@ -1,7 +1,7 @@
 package com.dolokey.dkblog.config;
 
 
-import com.dolokey.dkblog.component.security.DkAuthenticationProvider;
+import com.dolokey.dkblog.component.security.EmptyAuthenticationProvider;
 import jakarta.annotation.Resource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,13 +22,13 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     @Resource
-    private DkAuthenticationProvider dkAuthenticationProvider;
+    private EmptyAuthenticationProvider emptyAuthenticationProvider;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         // 禁用csrf 通过jwt进行校验
         http.csrf(AbstractHttpConfigurer::disable)
-                .authenticationProvider(dkAuthenticationProvider);
+                .authenticationProvider(emptyAuthenticationProvider);
         return http.build();
     }
 

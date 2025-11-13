@@ -5,8 +5,7 @@ import com.dolokey.dkblog.entity.exception.ClientException;
 import com.dolokey.dkblog.entity.security.ServeRight;
 import com.dolokey.dkblog.enums.ServeRightType;
 import com.dolokey.dkblog.util.TokenUtil;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -22,11 +21,10 @@ import java.lang.reflect.Method;
  * @author dolokey
  * @date 2025/10/04
  */
+@Slf4j
 @Aspect
 @Component
 public class ServeRightAspect {
-
-    private static final Logger log = LogManager.getLogger(ServeRightAspect.class);
 
     /**
      * 切面点，切所有的控制类
@@ -39,24 +37,18 @@ public class ServeRightAspect {
     @Around(value = "controllerAspect()", argNames = "joinPoint")
     public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
 
-        // 用户是管理员 无视权限注解
+        // 判断用户登录是否过期 同时判断用户是否管理员
         if (TokenUtil.isAdminUser()) {
             return joinPoint.proceed();
         }
 
         ServeRightType type = getServeRightType(joinPoint);
-
         // 登录用户权限校验
         if (type == ServeRightType.ADMIN) {
-            if (!TokenUtil.isLogin(false)) {
-                throw new ClientException(LogConstant.LOGIN_EXPIRED);
-            }
             log.info("访问接口{}的{}接口需要管理员权限", joinPoint.getSignature().getDeclaringTypeName(), joinPoint.getSignature().getName());
             throw new ClientException(LogConstant.ADMIN_RIGHT);
-        } else if (type == ServeRightType.USER && !TokenUtil.isLogin(false)) {
-            if (!TokenUtil.isLogin(false)) {
-                throw new ClientException(LogConstant.LOGIN_EXPIRED);
-            }
+        } else if (type == ServeRightType.USER && TokenUtil.getLoginUser() == null) {
+            // token为空时视为游客 上面已经校验
             log.info("访问接口{}的{}接口需要用户权限", joinPoint.getSignature().getDeclaringTypeName(), joinPoint.getSignature().getName());
             throw new ClientException(LogConstant.LOGIN_USER_RIGHT);
         }

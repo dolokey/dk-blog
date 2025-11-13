@@ -15,6 +15,16 @@ import org.slf4j.LoggerFactory;
  */
 public interface BaseServiceMapper<T extends CoreEntity> extends BaseMapper<T> {
 
+    default Long save(T entity) {
+        insert(entity);
+        return entity.getId();
+    }
+
+    default Long update(T entity) {
+        updateById(entity);
+        return entity.getId();
+    }
+
     default T findById(String id) throws ServiceException {
         if (CharSequenceUtil.isBlank(id)) {
             throw new ServiceException("对象[" + this.getClass().getName() + "]查询时未传入编号");

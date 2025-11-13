@@ -5,6 +5,9 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/dk_blog?useSSL=false&serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8
     username: root
     password: 123456
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
 logging:
   file:
     path: logs

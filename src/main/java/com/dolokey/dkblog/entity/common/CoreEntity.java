@@ -56,7 +56,7 @@ public class CoreEntity implements Serializable {
         }
         String[] idArr = ids.split(StringConstant.COMMA);
         for (String id : idArr) {
-            if (CharSequenceUtil.isNumeric(id)) {
+            if (!CharSequenceUtil.isNumeric(id)) {
                 throw new ServiceException("编号[" + id + "]不是数字");
             }
         }

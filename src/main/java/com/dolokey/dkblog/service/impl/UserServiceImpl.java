@@ -36,7 +36,7 @@ public class UserServiceImpl implements IUserService {
     @Override
     public List<User> list(UserDTO searchBean, Page<User> page) {
         LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<User>()
-                .eq(User::getUsername, searchBean.getUsername());
+                .eq(CharSequenceUtil.isNotBlank(searchBean.getNickname()), User::getNickname, searchBean.getNickname());
         return userMapper.selectList(page, queryWrapper);
     }
 
@@ -46,18 +46,17 @@ public class UserServiceImpl implements IUserService {
         User user = BeanUtil.toBean(userDTO, User.class);
         // 加密密码
         user.setPassword(encoder.encode(user.getPassword()));
-        userMapper.insert(user);
-        return user.getId();
+        return userMapper.save(user);
     }
 
     @Override
-    public void update(UserDTO userDTO) throws ValidationException, ServiceException {
+    public Long update(UserDTO userDTO) throws ValidationException, ServiceException {
         saveCheck(userDTO);
         User user = userMapper.findByIdThrowEx(userDTO.getId());
         BeanUtil.copyProperties(userDTO, user);
         // 加密密码
         user.setPassword(encoder.encode(user.getPassword()));
-        userMapper.updateById(user);
+        return userMapper.update(user);
     }
 
     @Override

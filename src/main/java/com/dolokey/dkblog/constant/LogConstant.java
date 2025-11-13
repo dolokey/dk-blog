@@ -44,5 +44,5 @@ public class LogConstant {
     /**
      * 管理员权限功能
      */
-    public static final String ADMIN_RIGHT = "需要管理员权限才能使用对应功能";
+    public static final String ADMIN_RIGHT = "权限不足";
 }

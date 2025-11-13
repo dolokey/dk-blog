@@ -54,6 +54,11 @@ public class LoginUser implements UserDetails {
     private User user;
 
     /**
+     * 登录时间
+     */
+    private Date loginTime;
+
+    /**
      * 到期时间
      */
     private Date expireTime;
